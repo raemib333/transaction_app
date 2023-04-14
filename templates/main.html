@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- http://getbootstrap.com/docs/5.1/ -->
+        <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+        <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
+
+        <link href="/static/styles.css" rel="stylesheet">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>Real Estate Transcation Game</title>
+
+    </head>
+    <body class="my_body">
+        <h3>Round {{ round + 1}} of 3</h3>
+        <div class="col-sm my_cont shadow p-2 mb-1 bg-body rounded mx-1">
+        <h4>Property for Sale: {{ property.name }}</h4>
+        <div>
+            <div class="row">
+                <div class="col-sm mx-1">
+                    <iframe src="{{ property.street_view }}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="col-sm mx-1">
+                    <iframe src="{{ property.map }}" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="col-sm mx-1">
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>Property Facts</th>
+                        </tr>
+                        <tr>
+                            <td>{{ property.name}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ property.street}}, {{ property.city }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ property.type}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ property.quality}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="d-flex col-sm my_cont shadow p-2 mb-1 bg-body rounded mx-1 align-items-center">
+                    <h4 class="mx-2">Place your bid</h4>
+                    <form action="/" method="post" class="d-flex align-items-center mx-2">
+                            <input autocomplete="off" autofocus id="bid" name="bid" placeholder="your bid" type="number" value="0" class="form-control mx-2">
+                            <button class="btn btn-primary mx-2" type="submit" >bid</button>
+                    </form>
+                    {{ info }}
+        </div>
+            <div class="col-sm my_cont shadow p-2 mb-1 bg-body rounded mx-2">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Player</th>
+                    <th>{{ player[0].name}}</th>
+                    <th>Prime Propery</th>
+                    <th>Swiss Propery</th>
+                    <th>Prime Real Estate</th>
+                </tr>
+                <tr>
+                    <th>Cash</th>
+                    {% for entry in player %}
+                        <td class="text-end">{{ '{:,.0f}'.format(entry.cash) }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th>Property value</th>
+                    {% for entry in player %}
+                        <td class="text-end">{{ '{:,.0f}'.format(entry.prop_value) }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    {% for entry in player %}
+                        <td class="text-end">{{ '{:,.0f}'.format(entry.total)}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <th>Return YTD</th>
+                    {% for entry in player %}
+                        <td class="text-end">{{ '{:,.1%}'.format(entry.ret)}}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+        </div>
+    </body>
+
+
+
+</html>
+
+
