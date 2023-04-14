@@ -18,6 +18,7 @@ fonttools==4.38.0
 fpdf2==2.6.1
 gitdb==4.0.10
 GitPython==3.1.30
+gunicorn==19.7.1
 idna==3.4
 importlib-metadata==6.0.0
 inflect==6.0.2
